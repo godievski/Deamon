@@ -6,6 +6,7 @@
 package daemon;
 
 import Controller.MngMap;
+import View.Game;
 
 /**
  *
@@ -18,8 +19,10 @@ public class Daemon {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        MngMap mngMap = new MngMap(2);
-        mngMap.printMap(0);
+        //MngMap mngMap = new MngMap(2);
+        //mngMap.printMap(0);
+        Game game = new Game();
+        game.printMap(0);
     }
     
 }

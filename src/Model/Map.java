@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Controller.MngEnemy;
 import java.util.Random;
 import java.util.Vector;
 
@@ -13,13 +14,14 @@ import java.util.Vector;
  * @author godievski
  */
 public class Map {
-    private static int MAX_L_ENEMY = 4;
+    public static int MAX_L_ENEMY = 4;
     
     private Cell[][] cells;
     private int length;
     private int width;
     private double prob_enemy;
-    int[] level_enemy;
+    private double prob_artefact;
+    private int[] level_enemy;
     
     public Map(int length, int width, int level){
         Random rnd = new Random();
@@ -30,9 +32,21 @@ public class Map {
             for(int j = 0; j < this.width; j++)
                 this.cells[i][j] = new Cell(i,j);
         this.prob_enemy = rnd.nextDouble() / 2;
+        this.prob_artefact = rnd.nextDouble() / 2;
+        
         this.level_enemy = new int[MAX_L_ENEMY];
         for(int i = 1; i <= MAX_L_ENEMY; i++)
-            this.level_enemy[i] = level + i;
+            this.level_enemy[i-1] = level + i;
+    }
+    
+    public double getProbArtefact(){
+        return this.prob_artefact;
+    }
+    public double getProbEnemy(){
+        return this.prob_enemy;
+    }
+    public int getLevelEnemy(int index){
+        return this.level_enemy[index];
     }
     
     public Cell getCell(int i, int j){

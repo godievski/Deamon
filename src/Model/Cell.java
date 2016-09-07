@@ -24,10 +24,16 @@ public class Cell {
     private int x;
     private int y;
     
+    /*reference to enemy*/
+    private Enemy enemy;
+    private Artefact artefact;
+    
     public Cell(int x, int y){
         this.type = WALL;
         this.x = x;
         this.y = y;
+        this.artefact = null;
+        this.enemy = null;
     }
     
     public int getType(){
@@ -50,6 +56,20 @@ public class Cell {
     public void setY(int y) {
         this.y = y;
     }
-    
 
+    public Enemy getEnemy() {
+        return enemy;
+    }
+    public void setEnemy(Enemy enemy) {
+        this.enemy = enemy;
+    }
+
+    
+    public Artefact getArtefact() {
+        return artefact;
+    }
+    public void setArtefact(Artefact artefact) {
+        this.artefact = artefact;
+    }
+    
 }

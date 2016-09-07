@@ -14,11 +14,11 @@ public class Enemy extends Entity{
     
     private int level;
     
-    public Enemy(char symbol) {
-        super(symbol);
+    public Enemy() {
+        super();
     }
-    public Enemy(char symbol, int x, int y, int level) {
-        super(symbol,x,y);
+    public Enemy(int x, int y, int level) {
+        super(x,y);
         this.level = level;
     }
     

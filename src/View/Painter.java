@@ -12,6 +12,13 @@ import Model.Map;
  * @author godievski
  */
 public class Painter {
+    private int x;
+    private int y;
+    
+    public Painter(int x, int y){
+        this.x = x;
+        this.y = y;
+    }
     
     void paintMap(Map map, int a, int b){
         

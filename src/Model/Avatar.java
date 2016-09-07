@@ -17,15 +17,15 @@ public class Avatar extends Entity{
     private Armor armor;
     private Weapon weapon;
     
-    public Avatar(char symbol) {
-        super(symbol);
+    public Avatar() {
+        super();
         this.bag = new Bag();
         this.hp = HPMAX;
         this.armor = new Armor("Armor 1");
         this.weapon = new Weapon("Weapon 1");
     }
     public Avatar(char symbol, int x, int y) {
-        super(symbol,x,y);
+        super(x,y);
         this.bag = new Bag();
         this.hp = HPMAX;
         this.armor = new Armor("Armor 1");

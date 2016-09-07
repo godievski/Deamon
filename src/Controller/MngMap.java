@@ -40,8 +40,28 @@ public class MngMap {
             int length = MIN + rnd.nextInt(MAX-MIN);
             int width = MIN + rnd.nextInt(MAX-MIN);
             this.maps[i] = generateMap(length,width,i);
+            this.setPrevNext(i);
         }
             
+    }
+    
+    public Map getMap(int level){
+        return this.maps[level];
+    }
+    
+    private void setPrevNext(int level){
+        Random rnd = new Random();
+        Map map = this.maps[level];
+        int w = (map.getWidth() - 1) / 2;
+        /*PREV*/
+        int posPrev_x = 1;
+        int posPrev_y = rnd.nextInt(w) * 2 + 1;
+        map.getCell(posPrev_x, posPrev_y).setType(Cell.PREV);
+        /*NEXT*/
+        int posNext_x = map.getLength() - 2;
+        int posNext_y = rnd.nextInt(w) * 2 + 1;
+        map.getCell(posNext_x, posNext_y).setType(Cell.NEXT);
+        
     }
 
     private Map generateMap(int length, int width, int level){
@@ -70,11 +90,22 @@ public class MngMap {
         Map map = this.maps[level];
         for(int i = 0; i < map.getLength();i++){
             for(int j = 0; j < map.getWidth(); j++){
-                int cellType = map.getCell(i, j).getType();
+                Cell cell = map.getCell(i, j);
+                int cellType = cell.getType();
                 if(cellType == Cell.WALL)
                     System.out.print(ANSI_RED+"\u2588"+ANSI_RESET);
-                else if(cellType == Cell.IN)
+                else if(cellType == Cell.IN){
+                    if(cell.getEnemy() != null){
+                        System.out.print("O");
+                    } else if(cell.getArtefact() != null){
+                        System.out.print("X");
+                    } else 
                     System.out.print(" ");
+                }
+                else if(cellType == Cell.PREV)
+                    System.out.print("P");
+                else if(cellType == Cell.NEXT)
+                    System.out.print("N");
             }
             System.out.println();
         }
