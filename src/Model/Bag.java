@@ -5,10 +5,23 @@
  */
 package Model;
 
+import java.util.Vector;
+
 /**
  *
  * @author godievski
  */
 public class Bag {
+    Vector<Artefact> artefacts;
     
+    public Bag(){
+        this.artefacts = new Vector();
+    }
+    
+    public Artefact getArtefact(int index){
+        return this.artefacts.get(index);
+    }
+    public void setArtefact(Artefact artefact){
+        this.artefacts.add(artefact);
+    }
 }

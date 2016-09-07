@@ -9,6 +9,23 @@ package Model;
  *
  * @author godievski
  */
-public class Enemy {
+public class Enemy extends Entity{
+    private static final int LEVEL_DEF = 1;
     
+    private int level;
+    
+    public Enemy(char symbol) {
+        super(symbol);
+    }
+    public Enemy(char symbol, int x, int y, int level) {
+        super(symbol,x,y);
+        this.level = level;
+    }
+    
+    public int getLevel(){
+        return this.level;
+    }
+    public void setLevel(int level){
+        this.level = level;
+    }
 }

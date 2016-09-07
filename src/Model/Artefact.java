@@ -10,5 +10,16 @@ package Model;
  * @author godievski
  */
 public class Artefact {
+    private String name;
     
+    public Artefact(String name){
+        this.name = name;
+    }
+    
+    public String getName(){
+        return this.name;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
 }
