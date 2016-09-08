@@ -15,7 +15,7 @@ public class Entity extends Sprite{
     /*constants*/
     private static final int X_DEF = 1;
     private static final int Y_DEF = 1;
-    public static final String IMAGE_DEF = "\u25B4";
+    public static final String IMAGE_DEF = "\u25CF";
     public static final String COLOR_DEF = Painter.ANSI_YELLOW;
       
     

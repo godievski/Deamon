@@ -12,7 +12,7 @@ import View.Painter;
  * @author godievski
  */
 public class Artefact extends Sprite{
-    public static final String IMAGE_DEF = "\u25CF";
+    public static final String IMAGE_DEF = "\u25B4";
     public static final String COLOR_DEF = Painter.ANSI_RED;
     
     private String name;

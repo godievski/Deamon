@@ -35,5 +35,38 @@ public class Avatar extends Entity{
         this.armor = new Armor("Armor 1");
         this.weapon = new Weapon("Weapon 1");
     }
+
+    public Artefact getArtefact(int index) {
+        return this.bag.getArtefact(index);
+    }
+    public void addArtefact(Artefact artefact) {
+        this.bag.addArtefact(artefact);
+    }
+    public void removeArtefact(int index){
+        this.bag.removeArtefact(index);
+    }
+    public void clearBag(){
+        this.bag.clear();
+    }
+    
+    public int getHp() {
+        return hp;
+    }
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public Armor getArmor() {
+        return armor;
+    }
+    public void setArmor(Armor armor) {
+        this.armor = armor;
+    }
+    public Weapon getWeapon() {
+        return weapon;
+    }
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
     
 }

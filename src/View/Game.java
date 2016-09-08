@@ -25,8 +25,8 @@ import java.util.Random;
 public class Game {
     /*constants*/
     private static final int MAX_LEVEL_DEF = 10;
-    private static final int LENGTH_VISIBLE = 5;
-    private static final int WIDTH_VISIBLE = 5;
+    private static final int LENGTH_VISIBLE = 15;
+    private static final int WIDTH_VISIBLE = 15;
     Random rnd = new Random();
     
     /*members*/
@@ -45,7 +45,7 @@ public class Game {
     }
     
     public void printMap(int level){
-        this.mngMap.printMap(level);
+        this.painter.paintGame(mngMap.getMap(level), avatar);
     }
     
     private void initMaps(){
@@ -56,9 +56,10 @@ public class Game {
         }
     }
     private void initAvatar(){
-        Point point;
-        
-        this.avatar.setX(MAX_LEVEL_DEF);
+        Point firstPos = this.mngMap.getPrevPosition(0);
+        this.avatar.setY(firstPos.y);
+        this.avatar.setX(firstPos.x);
+        this.avatar.setHp(Avatar.HPMAX);
     }
     private void generateEnemies(Map map, int level){
         int l = map.getLength() - 1;

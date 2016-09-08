@@ -28,8 +28,8 @@ public class MngMap {
     public static final String ANSI_WHITE = "\u001B[37m";
     
     
-    private static int MAX = 15;
-    private static int MIN = 10;
+    private static int MAX = 30;
+    private static int MIN = 20;
     
     private Map[] maps;
     private int levels;
@@ -62,6 +62,7 @@ public class MngMap {
         cell.setType(Cell.PREV);
         cell.setColor(Cell.COLOR_PREV);
         cell.setImage(Cell.IMAGE_PREV);
+        map.setPrev_pos(new Point(posPrev_x,posPrev_y));
         
         /*NEXT*/
         int posNext_x = map.getLength() - 2;
@@ -70,6 +71,7 @@ public class MngMap {
         cell2.setType(Cell.NEXT);
         cell2.setColor(Cell.COLOR_NEXT);
         cell2.setImage(Cell.IMAGE_NEXT);
+        map.setNext_pos(new Point(posNext_x,posNext_y));
     }
 
     private Map generateMap(int length, int width, int level){
@@ -98,11 +100,11 @@ public class MngMap {
     }
     
     public Point getPrevPosition(int level){
-        return new Point(0,0);
+        return this.maps[level].getPrev_pos();
     }
     
     public Point getNextPosition(int level){
-        return new Point(0,0);
+        return this.maps[level].getNext_pos();
     }
     
     public void printMap(int level){

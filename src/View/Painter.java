@@ -53,16 +53,18 @@ public class Painter {
         for(int i = iIni; i < iFin; i++){
             for(int j = jIni; j < jFin; j++){
                 /*NEED TO PAINT AVATAR*/
-                
-                Cell cell = map.getCell(i, j);
-                Enemy enemy = cell.getEnemy();
-                Artefact artefact = cell.getArtefact();
-                if(enemy != null){
-                    out = enemy.getColor() + enemy.getImage() + ANSI_RESET;
-                } else if (artefact != null){
-                    out = artefact.getColor() + artefact.getImage() + ANSI_RESET;
-                } else{
-                    out = cell.getColor() + cell.getImage() + ANSI_RESET;
+                if(i == avatar.getY() && j == avatar.getX()){
+                    out = avatar.getColor() + avatar.getImage() + ANSI_RESET;
+                } else {
+                    Cell cell = map.getCell(i, j);
+                    Enemy enemy = cell.getEnemy();
+                    Artefact artefact = cell.getArtefact();
+                    if(enemy != null)
+                        out = enemy.getColor() + enemy.getImage() + ANSI_RESET;
+                    else if (artefact != null)
+                        out = artefact.getColor() + artefact.getImage() + ANSI_RESET;
+                    else
+                        out = cell.getColor() + cell.getImage() + ANSI_RESET;    
                 }
                 System.out.print(out);
             }
