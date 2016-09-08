@@ -50,8 +50,8 @@ public class Game {
     private void generateEnemies(Map map, int level){
         int l = map.getLength() - 1;
         int w = map.getWidth() - 1;
-        for(int i = 1; i < l; i++){
-            for(int j = 1; j < w; j++){
+        for(int i = 1; i < w; i++){
+            for(int j = 1; j < l; j++){
                 Cell cell = map.getCell(i, j);
                 if(cell.getType() == Cell.IN){
                     double prob = map.getProbEnemy();
@@ -59,7 +59,7 @@ public class Game {
                     if (dec <= prob){
                         /*generate enemy*/
                         int random_level = rnd.nextInt(Map.MAX_L_ENEMY);
-                        Enemy enemy = new Enemy(i,j,map.getLevelEnemy(random_level));
+                        Enemy enemy = new Enemy(j,i,map.getLevelEnemy(random_level));
                         cell.setEnemy(enemy);
                         this.mngEnemy.addEnemy(enemy, level);
                     }
@@ -71,8 +71,8 @@ public class Game {
     private void generateArtefact(Map map){
         int l = map.getLength() - 1;
         int w = map.getWidth() - 1;
-        for(int i = 1; i < l; i++){
-            for(int j = 1; j < w; j++){
+        for(int i = 1; i < w; i++){
+            for(int j = 1; j < l; j++){
                 Cell cell = map.getCell(i, j);
                 if(cell.getType() == Cell.IN){
                     double prob = map.getProbArtefact();

@@ -56,11 +56,11 @@ public class MngMap {
         /*PREV*/
         int posPrev_x = 1;
         int posPrev_y = rnd.nextInt(w) * 2 + 1;
-        map.getCell(posPrev_x, posPrev_y).setType(Cell.PREV);
+        map.getCell(posPrev_y,posPrev_x).setType(Cell.PREV);
         /*NEXT*/
         int posNext_x = map.getLength() - 2;
         int posNext_y = rnd.nextInt(w) * 2 + 1;
-        map.getCell(posNext_x, posNext_y).setType(Cell.NEXT);
+        map.getCell(posNext_y,posNext_x).setType(Cell.NEXT);
         
     }
 
@@ -68,8 +68,8 @@ public class MngMap {
         Random rnd = new Random();
         Map map = new Map(length, width, level);
         Stack<Cell> stackCell = new Stack();
-        int i = rnd.nextInt(length)*2 + 1;
-        int j = rnd.nextInt(width)*2 + 1;
+        int i = rnd.nextInt(width)*2 + 1;
+        int j = rnd.nextInt(length)*2 + 1;
         
         Cell cellTemp = map.getCell(i, j);
         cellTemp.setType(Cell.IN);
@@ -77,8 +77,9 @@ public class MngMap {
         while(!stackCell.empty()){
             Cell cell = stackCell.peek();
             Cell cellAd;
-            if ((cellAd=map.getAdjacent(cell.getX(),cell.getY())) != null){
-                map.createPath(cell.getX(),cell.getY(),cellAd.getX(),cellAd.getY());
+            /*getY == i && getX == j*/
+            if ((cellAd=map.getAdjacent(cell.getY(),cell.getX())) != null){
+                map.createPath(cell.getY(),cell.getX(),cellAd.getY(),cellAd.getX());
                 cellAd.setType(Cell.IN);
                 stackCell.push(cellAd);
             } else
@@ -86,10 +87,11 @@ public class MngMap {
         }
         return map;
     }
+    
     public void printMap(int level){
         Map map = this.maps[level];
-        for(int i = 0; i < map.getLength();i++){
-            for(int j = 0; j < map.getWidth(); j++){
+        for(int i = 0; i < map.getWidth();i++){
+            for(int j = 0; j < map.getLength(); j++){
                 Cell cell = map.getCell(i, j);
                 int cellType = cell.getType();
                 if(cellType == Cell.WALL)
@@ -111,8 +113,8 @@ public class MngMap {
         }
     }
     public void printMap(Map map){
-        for(int i = 0; i < map.getLength();i++){
-            for(int j = 0; j < map.getWidth(); j++){
+        for(int i = 0; i < map.getWidth();i++){
+            for(int j = 0; j < map.getLength(); j++){
                 int cellType = map.getCell(i, j).getType();
                 if(cellType == Cell.WALL)
                     System.out.print(ANSI_RED+"\u2588"+ANSI_RESET);

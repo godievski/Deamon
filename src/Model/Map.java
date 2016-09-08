@@ -27,10 +27,10 @@ public class Map {
         Random rnd = new Random();
         this.length = 2*length+1;
         this.width = 2*width+1;
-        this.cells = new Cell[this.length][this.width];
-        for(int i = 0; i < this.length; i++)
-            for(int j = 0; j < this.width; j++)
-                this.cells[i][j] = new Cell(i,j);
+        this.cells = new Cell[this.width][this.length];
+        for(int i = 0; i < this.width; i++)
+            for(int j = 0; j < this.length; j++)
+                this.cells[i][j] = new Cell(j,i);
         this.prob_enemy = rnd.nextDouble() / 2;
         this.prob_artefact = rnd.nextDouble() / 2;
         
@@ -68,11 +68,11 @@ public class Map {
     }
     public Cell getAdjacent(int i, int j){
         Cell[] cellsAround = new Cell[4];
-        if (i+2 < this.length)
+        if (i+2 < this.width)
             cellsAround[0] = this.cells[i + 2][j];
         if (i-2 >= 0) 
             cellsAround[1] = this.cells[i - 2][j];
-        if (j+2 < this.width)
+        if (j+2 < this.length)
             cellsAround[2] = this.cells[i][j + 2];
         if (j - 2 >= 0)
             cellsAround[3] = this.cells[i][j - 2];
@@ -98,8 +98,8 @@ public class Map {
                 j1 = j2;
                 j2 = aux;
             }
-            for(int y = j1 + 1; y <= j2; y++){
-                Cell cell = this.cells[i1][y];
+            for(int x = j1 + 1; x <= j2; x++){
+                Cell cell = this.cells[i1][x];
                 cell.setType(Cell.IN);
             }
         } else if (j1 == j2) {
@@ -109,8 +109,8 @@ public class Map {
                 i1 = i2;
                 i2 = aux;
             }
-            for(int x = i1 + 1; x <=i2; x++){
-                Cell cell = this.cells[x][j1];
+            for(int y = i1 + 1; y <=i2; y++){
+                Cell cell = this.cells[y][j1];
                 cell.setType(Cell.IN);
             }
         } else {
