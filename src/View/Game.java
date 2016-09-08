@@ -9,11 +9,13 @@ import Controller.MngEnemy;
 import Controller.MngMap;
 import Model.Armor;
 import Model.Artefact;
+import Model.Avatar;
 import Model.Cell;
 import Model.Enemy;
 import Model.Map;
 import Model.Potion;
 import Model.Weapon;
+import java.awt.Point;
 import java.util.Random;
 
 /**
@@ -23,16 +25,23 @@ import java.util.Random;
 public class Game {
     /*constants*/
     private static final int MAX_LEVEL_DEF = 10;
+    private static final int LENGTH_VISIBLE = 5;
+    private static final int WIDTH_VISIBLE = 5;
     Random rnd = new Random();
     
     /*members*/
     private MngMap mngMap;
     private MngEnemy mngEnemy;
+    private Painter painter;
+    private Avatar avatar;
     
     public Game(){
         this.mngMap = new MngMap(MAX_LEVEL_DEF);
         this.mngEnemy = new MngEnemy(MAX_LEVEL_DEF);
+        this.painter = new Painter(LENGTH_VISIBLE,WIDTH_VISIBLE);
+        this.avatar = new Avatar();
         this.initMaps();
+        this.initAvatar();
     }
     
     public void printMap(int level){
@@ -46,7 +55,11 @@ public class Game {
             this.generateArtefact(map);
         }
     }
-    
+    private void initAvatar(){
+        Point point;
+        
+        this.avatar.setX(MAX_LEVEL_DEF);
+    }
     private void generateEnemies(Map map, int level){
         int l = map.getLength() - 1;
         int w = map.getWidth() - 1;
@@ -66,8 +79,7 @@ public class Game {
                 }
             }
         }
-    }
-     
+    } 
     private void generateArtefact(Map map){
         int l = map.getLength() - 1;
         int w = map.getWidth() - 1;

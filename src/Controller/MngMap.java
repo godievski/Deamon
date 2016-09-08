@@ -7,7 +7,9 @@ package Controller;
 
 import Model.Cell;
 import Model.Map;
+import java.awt.Point;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.Stack;
 
 /**
@@ -56,15 +58,23 @@ public class MngMap {
         /*PREV*/
         int posPrev_x = 1;
         int posPrev_y = rnd.nextInt(w) * 2 + 1;
-        map.getCell(posPrev_y,posPrev_x).setType(Cell.PREV);
+        Cell cell = map.getCell(posPrev_y,posPrev_x);
+        cell.setType(Cell.PREV);
+        cell.setColor(Cell.COLOR_PREV);
+        cell.setImage(Cell.IMAGE_PREV);
+        
         /*NEXT*/
         int posNext_x = map.getLength() - 2;
         int posNext_y = rnd.nextInt(w) * 2 + 1;
-        map.getCell(posNext_y,posNext_x).setType(Cell.NEXT);
-        
+        Cell cell2 = map.getCell(posNext_y,posNext_x);
+        cell2.setType(Cell.NEXT);
+        cell2.setColor(Cell.COLOR_NEXT);
+        cell2.setImage(Cell.IMAGE_NEXT);
     }
 
     private Map generateMap(int length, int width, int level){
+        Scanner reader = new Scanner(System.in);
+        
         Random rnd = new Random();
         Map map = new Map(length, width, level);
         Stack<Cell> stackCell = new Stack();
@@ -80,12 +90,19 @@ public class MngMap {
             /*getY == i && getX == j*/
             if ((cellAd=map.getAdjacent(cell.getY(),cell.getX())) != null){
                 map.createPath(cell.getY(),cell.getX(),cellAd.getY(),cellAd.getX());
-                cellAd.setType(Cell.IN);
                 stackCell.push(cellAd);
             } else
                 stackCell.pop();
         }
         return map;
+    }
+    
+    public Point getPrevPosition(int level){
+        return new Point(0,0);
+    }
+    
+    public Point getNextPosition(int level){
+        return new Point(0,0);
     }
     
     public void printMap(int level){
@@ -94,7 +111,7 @@ public class MngMap {
             for(int j = 0; j < map.getLength(); j++){
                 Cell cell = map.getCell(i, j);
                 int cellType = cell.getType();
-                if(cellType == Cell.WALL)
+                if(cellType == Cell.WALL)   
                     System.out.print(ANSI_RED+"\u2588"+ANSI_RESET);
                 else if(cellType == Cell.IN){
                     if(cell.getEnemy() != null){
@@ -115,14 +132,25 @@ public class MngMap {
     public void printMap(Map map){
         for(int i = 0; i < map.getWidth();i++){
             for(int j = 0; j < map.getLength(); j++){
-                int cellType = map.getCell(i, j).getType();
-                if(cellType == Cell.WALL)
+                Cell cell = map.getCell(i, j);
+                int cellType = cell.getType();
+                if(cellType == Cell.WALL)   
                     System.out.print(ANSI_RED+"\u2588"+ANSI_RESET);
-                else if(cellType == Cell.IN)
+                else if(cellType == Cell.IN){
+                    if(cell.getEnemy() != null){
+                        System.out.print("O");
+                    } else if(cell.getArtefact() != null){
+                        System.out.print("X");
+                    } else 
                     System.out.print(" ");
+                }
+                else if(cellType == Cell.PREV)
+                    System.out.print("P");
+                else if(cellType == Cell.NEXT)
+                    System.out.print("N");
             }
             System.out.println();
         }
-        System.out.println();
     }
+    
 }

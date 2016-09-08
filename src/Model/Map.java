@@ -6,6 +6,7 @@
 package Model;
 
 import Controller.MngEnemy;
+import java.awt.Point;
 import java.util.Random;
 import java.util.Vector;
 
@@ -22,6 +23,8 @@ public class Map {
     private double prob_enemy;
     private double prob_artefact;
     private int[] level_enemy;
+    private Point prev_pos;
+    private Point next_pos;
     
     public Map(int length, int width, int level){
         Random rnd = new Random();
@@ -98,9 +101,11 @@ public class Map {
                 j1 = j2;
                 j2 = aux;
             }
-            for(int x = j1 + 1; x <= j2; x++){
+            for(int x = j1; x <= j2; x++){
                 Cell cell = this.cells[i1][x];
                 cell.setType(Cell.IN);
+                cell.setColor(Cell.COLOR_IN);
+                cell.setImage(Cell.IMAGE_IN);
             }
         } else if (j1 == j2) {
             int aux = i1;
@@ -109,14 +114,31 @@ public class Map {
                 i1 = i2;
                 i2 = aux;
             }
-            for(int y = i1 + 1; y <=i2; y++){
+            for(int y = i1; y <=i2; y++){
                 Cell cell = this.cells[y][j1];
                 cell.setType(Cell.IN);
+                cell.setColor(Cell.COLOR_IN);
+                cell.setImage(Cell.IMAGE_IN);
             }
         } else {
             System.err.println("Error: Created Path function");
             System.exit(1);
         }
     }
+
     
+    public Point getPrev_pos() {
+        return prev_pos;
+    }
+    public void setPrev_pos(Point prev_pos) {
+        this.prev_pos = prev_pos;
+    }
+    
+    public Point getNext_pos() {
+        return next_pos;
+    }
+    public void setNext_pos(Point next_pos) {
+        this.next_pos = next_pos;
+    }
+
 }

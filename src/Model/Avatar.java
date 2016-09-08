@@ -5,11 +5,14 @@
  */
 package Model;
 
+import View.Painter;
+
 /**
  *
  * @author godievski
  */
 public class Avatar extends Entity{
+    public static final String COLOR_AVATAR = Painter.ANSI_YELLOW;
     public static final int HPMAX = 10;
   
     private Bag bag;
@@ -19,6 +22,7 @@ public class Avatar extends Entity{
     
     public Avatar() {
         super();
+        this.setColor(COLOR_AVATAR);
         this.bag = new Bag();
         this.hp = HPMAX;
         this.armor = new Armor("Armor 1");

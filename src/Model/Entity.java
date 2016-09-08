@@ -5,13 +5,19 @@
  */
 package Model;
 
+import View.Painter;
+
 /**
  *
  * @author godievski
  */
-public class Entity {
+public class Entity extends Sprite{
+    /*constants*/
     private static final int X_DEF = 1;
     private static final int Y_DEF = 1;
+    public static final String IMAGE_DEF = "\u25B4";
+    public static final String COLOR_DEF = Painter.ANSI_YELLOW;
+      
     
     private int x;
     private int y;   
@@ -21,11 +27,13 @@ public class Entity {
     */
     
     public Entity(){
+        super(IMAGE_DEF,COLOR_DEF);
         this.x = X_DEF;
         this.y = Y_DEF;
     }
     
     public Entity(int x, int y){
+        super(IMAGE_DEF,COLOR_DEF);
         this.x = x;
         this.y = y;
     }

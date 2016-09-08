@@ -10,14 +10,24 @@ package Model;
  * @author godievski
  */
 
+import View.Painter;
 
-
-public class Cell {
+public class Cell extends Sprite {
     /*constants*/
     public static int WALL = 0;
     public static int IN = 1;
     public static int PREV = 2;
     public static int NEXT = 3;
+    
+    public static String IMAGE_WALL = "\u2588";
+    public static String IMAGE_IN = " ";
+    public static String IMAGE_PREV = "\u2588";
+    public static String IMAGE_NEXT = "\u2588";
+    
+    public static final String COLOR_WALL = Painter.ANSI_WHITE;
+    public static String COLOR_IN = Painter.ANSI_BLUE;
+    public static String COLOR_PREV = Painter.ANSI_WHITE;
+    public static String COLOR_NEXT = Painter.ANSI_PURPLE;
 
     /*members*/
     private int type;
@@ -29,6 +39,7 @@ public class Cell {
     private Artefact artefact;
     
     public Cell(int x, int y){
+        super(IMAGE_WALL,COLOR_WALL);
         this.type = WALL;
         this.x = x;
         this.y = y;
@@ -63,7 +74,6 @@ public class Cell {
     public void setEnemy(Enemy enemy) {
         this.enemy = enemy;
     }
-
     
     public Artefact getArtefact() {
         return artefact;

@@ -5,14 +5,20 @@
  */
 package Model;
 
+import View.Painter;
+
 /**
  *
  * @author godievski
  */
-public class Artefact {
+public class Artefact extends Sprite{
+    public static final String IMAGE_DEF = "\u25CF";
+    public static final String COLOR_DEF = Painter.ANSI_RED;
+    
     private String name;
     
     public Artefact(String name){
+        super(IMAGE_DEF,COLOR_DEF);
         this.name = name;
     }
     
