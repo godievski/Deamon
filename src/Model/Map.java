@@ -31,8 +31,8 @@ public class Map {
         for(int i = 0; i < this.width; i++)
             for(int j = 0; j < this.length; j++)
                 this.cells[i][j] = new Cell(j,i);
-        this.prob_enemy = rnd.nextDouble() / 2;
-        this.prob_artefact = rnd.nextDouble() / 2;
+        this.prob_enemy = rnd.nextDouble() / 10;
+        this.prob_artefact = rnd.nextDouble() / 10;
         
         this.level_enemy = new int[MAX_L_ENEMY];
         for(int i = 1; i <= MAX_L_ENEMY; i++)
