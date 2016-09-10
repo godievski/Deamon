@@ -26,7 +26,7 @@ public class Cell extends Sprite {
     
     public static final String COLOR_WALL = Painter.ANSI_WHITE;
     public static String COLOR_IN = Painter.ANSI_BLUE;
-    public static String COLOR_PREV = Painter.ANSI_WHITE;
+    public static String COLOR_PREV = Painter.ANSI_CYAN;
     public static String COLOR_NEXT = Painter.ANSI_PURPLE;
 
     /*members*/

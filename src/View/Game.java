@@ -104,18 +104,18 @@ public class Game {
             if(this.level > 0){
                 this.level--;
                 Map map = this.mngMap.getMap(this.level);
-                Point prev_pos = map.getPrev_pos();
-                avatar.setX(prev_pos.x);
-                avatar.setY(prev_pos.y);
+                Point next_pos = map.getNext_pos();
+                avatar.setX(next_pos.x);
+                avatar.setY(next_pos.y);
                 this.printMap(level);
             }
         } else if (type_cell == Cell.NEXT){
             if (this.level < MAX_LEVEL_DEF-1){
                 this.level++;
                 Map map = this.mngMap.getMap(this.level);
-                Point next_pos = map.getNext_pos();
-                avatar.setX(next_pos.x);
-                avatar.setY(next_pos.y);
+                Point prev_pos = map.getPrev_pos();
+                avatar.setX(prev_pos.x);
+                avatar.setY(prev_pos.y);
                 this.printMap(level);
             } else{
                 /*FINISH THE GAME*/
