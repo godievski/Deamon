@@ -8,6 +8,7 @@ package Controller;
 import Model.Cell;
 import Model.Enemy;
 import Model.Map;
+import java.awt.Point;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -35,6 +36,16 @@ public class MngEnemy {
     }
     public void deleteEnemy(int index, int level){
         this.enemies[level].remove(index);
+    }
+    public void deleteEnemy(Point position, int level){
+        ArrayList<Enemy> listEnemy = enemies[level];
+        for(int i = 0;i<listEnemy.size();i++){
+            Enemy enemy = listEnemy.get(i);
+            if (enemy.getX() == position.x && enemy.getY() == position.y){
+                listEnemy.remove(i);
+                break;
+            }
+        }
     }
     public void clearEnemies(int level){
         this.enemies[level].clear();

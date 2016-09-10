@@ -19,8 +19,8 @@ public class Entity extends Sprite{
     public static final String COLOR_DEF = Painter.ANSI_YELLOW;
       
     
-    private int x;
-    private int y;   
+    protected int x;
+    protected int y;   
     /*for future
     private double x_ext;
     private double y_ext;

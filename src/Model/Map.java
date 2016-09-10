@@ -53,7 +53,10 @@ public class Map {
     }
     
     public Cell getCell(int i, int j){
-        return this.cells[i][j];
+        if(i>= 0 && i < this.width && j >= 0 && j < this.length)
+            return this.cells[i][j];
+        else
+            return null;
     }
 
     public int getLength() {

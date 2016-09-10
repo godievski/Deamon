@@ -22,7 +22,7 @@ public class Daemon {
         //MngMap mngMap = new MngMap(2);
         //mngMap.printMap(0);
         Game game = new Game();
-        game.printMap(0);
+        game.play();
     }
     
 }
