@@ -28,7 +28,7 @@ import java.util.logging.Logger;
  */
 public class Game {
     /*constants*/
-    private static final int MAX_LEVEL_DEF = 10;
+    private static final int MAX_LEVEL_DEF = 2;
     private static final int LENGTH_VISIBLE = 15;
     private static final int WIDTH_VISIBLE = 15;
     Random rnd = new Random();
@@ -61,10 +61,8 @@ public class Game {
         while(true){
             this.printMap(this.level);
             this.readCmd();
-            if (this.updateState())
-                break;
+            this.updateState();
         }
-        this.printFinalMsg();
     }
     
     private void readCmd(){
@@ -83,8 +81,7 @@ public class Game {
         }
     }
     
-    private boolean updateState(){
-        boolean result = false;
+    private void updateState(){
         /*ENEMIES*/
         if (result_attack){
             Point attack_pos = avatar.getDirectionPos();
@@ -117,12 +114,8 @@ public class Game {
                 avatar.setX(prev_pos.x);
                 avatar.setY(prev_pos.y);
                 this.printMap(level);
-            } else{
-                /*FINISH THE GAME*/
-                result = true;
             }
         }
-        return result;
     }
     
     public void printMap(int level){
