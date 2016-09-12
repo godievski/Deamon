@@ -58,6 +58,7 @@ public class Game {
     
     public void play(){
         this.reset();
+        this.printInstructionMsg();
         while(true){
             this.printMap(this.level);
             this.readCmd();
@@ -124,9 +125,15 @@ public class Game {
         this.painter.paintGame(mngMap.getMap(level), avatar);
     }
     
-    public void printFinalMsg(){
+    public void printInstructionMsg(){
         clearConsole();
-        System.out.println("You finish this shitty game... You're wellcome");
+        System.out.println("INSTRUCTIONS");
+        System.out.println("==========================");
+        System.out.println("MOVE: W-A-S-D");
+        System.out.println("PICK-UP ARTEFACT: V");
+        System.out.println("ATTACK: C");
+        System.out.println("(PRESS ENTER TO CONTINUE...)");
+        scan.nextLine();
     }
     
     private void initMaps(){
