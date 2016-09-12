@@ -40,19 +40,23 @@ public class Painter {
         int yCenter = avatar.getY();
         
         int iIni = yCenter - this.width;
-        if (iIni < 0) iIni = 0;
+        //if (iIni < 0) iIni = 0;
         int iFin = yCenter + this.width;
-        if (iFin > map.getWidth()) iFin = map.getWidth();
+        //if (iFin > map.getWidth()) iFin = map.getWidth();
         
         int jIni = xCenter - this.length;
-        if (jIni < 0) jIni = 0;
+        //if (jIni < 0) jIni = 0;
         int jFin = xCenter + this.length;
-        if (jFin > map.getLength()) 
+        //if (jFin > map.getLength()) 
             jFin = map.getLength();
         String out = " ";
         for(int i = iIni; i < iFin; i++){
             for(int j = jIni; j < jFin; j++){
                 /*NEED TO PAINT AVATAR*/
+                if (i < 0 || i > map.getWidth() || j < 0 || j > map.getLength()){
+                    System.out.print(" ");
+                    continue;
+                }
                 if(i == avatar.getY() && j == avatar.getX()){
                     out = avatar.getColor() + avatar.getImage() + ANSI_RESET;
                 } else {
