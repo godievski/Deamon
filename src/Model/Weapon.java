@@ -13,7 +13,6 @@ public class Weapon extends Artefact{
     private static final int DAMAGE_MIN_DEF = 1;
     private static final int DAMAGE_MAX_DEF = 10;
     
-    
     private int damage_min;
     private int damage_max;
     

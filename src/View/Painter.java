@@ -38,25 +38,34 @@ public class Painter {
     void paintGame(Map map,Avatar avatar){
         int xCenter = avatar.getX();
         int yCenter = avatar.getY();
+        int offset = 0;
         
         int iIni = yCenter - this.width;
-        //if (iIni < 0) iIni = 0;
         int iFin = yCenter + this.width;
-        //if (iFin > map.getWidth()) iFin = map.getWidth();
+        if (iIni < 0){
+            iFin -= iIni;
+            iIni = 0;
+        }
+        if (iFin > map.getWidth()){
+            offset = iFin - map.getWidth();
+            iFin = map.getWidth();
+            iIni += offset;
+        }
         
         int jIni = xCenter - this.length;
-        //if (jIni < 0) jIni = 0;
         int jFin = xCenter + this.length;
-        //if (jFin > map.getLength()) 
+        if (jIni < 0){
+            jFin -= jIni;
+            jIni = 0;
+        }
+        if (jFin > map.getLength()) {
+            offset = jFin - map.getLength();
             jFin = map.getLength();
+            jIni += offset;
+        }
         String out = " ";
         for(int i = iIni; i < iFin; i++){
             for(int j = jIni; j < jFin; j++){
-                /*NEED TO PAINT AVATAR*/
-                if (i < 0 || i > map.getWidth() || j < 0 || j > map.getLength()){
-                    System.out.print(" ");
-                    continue;
-                }
                 if(i == avatar.getY() && j == avatar.getX()){
                     out = avatar.getColor() + avatar.getImage() + ANSI_RESET;
                 } else {

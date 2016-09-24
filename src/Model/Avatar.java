@@ -110,6 +110,7 @@ public class Avatar extends Entity{
     public boolean attack(){
         return true;
     }
+    
     public void pickUpArtefact(Map map){
         Cell cell;
         Point position_fin = this.getDirectionPos();

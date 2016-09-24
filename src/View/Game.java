@@ -61,12 +61,13 @@ public class Game {
         this.printInstructionMsg();
         while(true){
             this.printMap(this.level);
-            this.readCmd();
+            if (!this.readCmd()) break;
             this.updateState();
         }
+        this.printExitMsg();
     }
     
-    private void readCmd(){
+    private boolean readCmd(){
         String string_cmd = scan.nextLine();
         if (string_cmd.length() > 0){
             char cmd = Character.toUpperCase(string_cmd.charAt(0));
@@ -79,7 +80,10 @@ public class Game {
             }
             else if (cmd == 'V')
                 this.avatar.pickUpArtefact(this.mngMap.getMap(level));
+            else if (cmd == 'P')
+                return false;
         }
+        return true;
     }
     
     private void updateState(){
@@ -125,7 +129,7 @@ public class Game {
         this.painter.paintGame(mngMap.getMap(level), avatar);
     }
     
-    public void printInstructionMsg(){
+    private void printInstructionMsg(){
         clearConsole();
         System.out.println("INSTRUCTIONS");
         System.out.println("==========================");
@@ -135,7 +139,10 @@ public class Game {
         System.out.println("(PRESS ENTER TO CONTINUE...)");
         scan.nextLine();
     }
-    
+    private void printExitMsg(){
+        clearConsole();
+        System.out.println("GAME OVER");
+    }
     private void initMaps(){
         for(int i = 0; i < MAX_LEVEL_DEF;i ++){
             Map map = this.mngMap.getMap(i);
@@ -149,6 +156,8 @@ public class Game {
         this.avatar.setX(firstPos.x);
         this.avatar.setHp(Avatar.HPMAX);
     }
+    
+    //TODO: Change how the enemies are generated in order to create a "respawn"
     private void generateEnemies(Map map, int level){
         int l = map.getLength() - 1;
         int w = map.getWidth() - 1;
@@ -168,7 +177,9 @@ public class Game {
                 }
             }
         }
-    } 
+    }
+    
+    //TODO: Same to enemies
     private void generateArtefact(Map map){
         int l = map.getLength() - 1;
         int w = map.getWidth() - 1;
@@ -210,6 +221,7 @@ public class Game {
             } else {
                 Runtime.getRuntime().exec("clear");
                 System.out.print("\033[H\033[2J");
+                System.out.flush();
             }
         } catch (final Exception e) {
             //  Handle any exceptions.
