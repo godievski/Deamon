@@ -58,14 +58,12 @@ public class Avatar extends Entity{
     public void clearBag(){
         this.bag.clear();
     }
-    
     public int getHp() {
         return hp;
     }
     public void setHp(int hp) {
         this.hp = hp;
     }
-
     public Armor getArmor() {
         return armor;
     }
@@ -78,7 +76,6 @@ public class Avatar extends Entity{
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
-    
     /*ACTIONS*/
     public void move(Map map,char dir){
         int x_fin = this.x;
