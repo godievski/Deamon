@@ -28,8 +28,8 @@ public class MngMap {
     public static final String ANSI_WHITE = "\u001B[37m";
     
     
-    private static int MAX = 40;
-    private static int MIN = 30;
+    private static int MAX = 20;
+    private static int MIN = 10;
     
     private Map[] maps;
     private int levels;

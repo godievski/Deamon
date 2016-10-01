@@ -49,7 +49,7 @@ public class Painter {
         if (iFin > map.getWidth()){
             offset = iFin - map.getWidth();
             iFin = map.getWidth();
-            iIni += offset;
+            iIni -= offset;
         }
         
         int jIni = xCenter - this.length;
@@ -61,7 +61,7 @@ public class Painter {
         if (jFin > map.getLength()) {
             offset = jFin - map.getLength();
             jFin = map.getLength();
-            jIni += offset;
+            jIni -= offset;
         }
         String out = " ";
         for(int i = iIni; i < iFin; i++){

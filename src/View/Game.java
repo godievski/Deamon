@@ -29,8 +29,8 @@ import java.util.logging.Logger;
 public class Game {
     /*constants*/
     private static final int MAX_LEVEL_DEF = 2;
-    private static final int LENGTH_VISIBLE = 15;
-    private static final int WIDTH_VISIBLE = 15;
+    private static final int LENGTH_VISIBLE = 8;
+    private static final int WIDTH_VISIBLE = 8;
     Random rnd = new Random();
     Scanner scan = new Scanner(System.in);
     
