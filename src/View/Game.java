@@ -187,17 +187,18 @@ public class Game {
             for(int j = 1; j < l; j++){
                 Cell cell = map.getCell(i, j);
                 if(cell.getType() == Cell.IN){
-                    double prob = map.getProbArtefact();
+                    Artefact artefact = randomArtefact();
+                    double prob = artefact.getProb();
                     double dec = rnd.nextDouble();
                     if (dec <= prob){
                         /*generate artefact*/
-                        Artefact artefact = randomArtefact();
                         cell.setArtefact(artefact);
                     }
                 }
             }
         }
-    }
+    } 
+    
     private Artefact randomArtefact(){
         int dec = rnd.nextInt(3);
         switch (dec) {

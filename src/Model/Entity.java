@@ -21,19 +21,21 @@ public class Entity extends Sprite{
     
     protected int x;
     protected int y;   
+    protected int hp;
     /*for future
     private double x_ext;
     private double y_ext;
     */
     
-    public Entity(){
+    public Entity(int hp){
         super(IMAGE_DEF,COLOR_DEF);
         this.x = X_DEF;
         this.y = Y_DEF;
     }
     
-    public Entity(int x, int y){
+    public Entity(int x, int y, int hp){
         super(IMAGE_DEF,COLOR_DEF);
+        this.hp = hp;
         this.x = x;
         this.y = y;
     }
@@ -50,5 +52,17 @@ public class Entity extends Sprite{
     }
     public void setY(int y) {
         this.y = y;
+    }
+    public void setHp(int hp){
+        this.hp = hp;
+    }
+    public int getHp(){
+        return this.hp;
+    }
+    public void increaseHp(int points){
+        this.hp += points;
+    }
+    public void decreaseHp(int points){
+        this.hp -= points;
     }
 }

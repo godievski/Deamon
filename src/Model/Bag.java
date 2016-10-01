@@ -19,7 +19,13 @@ public class Bag {
     }
     
     public Artefact getArtefact(int index){
-        return this.artefacts.get(index);
+        if(index < 0 && index > this.artefacts.size())
+            return this.artefacts.get(index);
+        else
+            return null;
+    }
+    public void replaceArtefact(int index, Artefact artefact){
+        this.artefacts.add(index, artefact);
     }
     public void addArtefact(Artefact artefact){
         this.artefacts.add(artefact);
@@ -29,5 +35,8 @@ public class Bag {
     }
     public void clear(){
         this.artefacts.clear();
+    }
+    public int size(){
+        return this.artefacts.size();
     }
 }

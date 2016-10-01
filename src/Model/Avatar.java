@@ -20,17 +20,17 @@ public class Avatar extends Entity{
     public static final int RIGHT_DIR = 4;
     
     public static final String COLOR_AVATAR = Painter.ANSI_YELLOW;
-    public static final int HPMAX = 10;
+    public static final int HPMAX = 100;
   
     private Bag bag;
-    private int hp;
     private Armor armor;
     private Weapon weapon;
-    
+    private int hp_max;
     private int direction;
     
     public Avatar() {
-        super();
+        super(HPMAX);
+        this.hp_max = HPMAX;
         this.setColor(COLOR_AVATAR);
         this.bag = new Bag();
         this.hp = HPMAX;
@@ -38,7 +38,7 @@ public class Avatar extends Entity{
         this.weapon = new Weapon("Weapon 1");
     }
     public Avatar(char symbol, int x, int y) {
-        super(x,y);
+        super(x,y,HPMAX);
         this.direction = INIT_DIR;
         this.bag = new Bag();
         this.hp = HPMAX;
@@ -55,27 +55,49 @@ public class Avatar extends Entity{
     public void removeArtefact(int index){
         this.bag.removeArtefact(index);
     }
+    public void useArtefact(int index){
+        Artefact artefact = this.bag.getArtefact(index);
+        if (artefact != null){
+            if (artefact instanceof Weapon){
+                this.bag.replaceArtefact(index, this.weapon);
+                this.weapon = (Weapon) artefact;
+                this.updateHPMax();
+            } else if (artefact instanceof Armor){
+                this.bag.replaceArtefact(index,this.armor);
+                this.armor = (Armor) artefact;
+                this.updateHPMax();
+            } else if (artefact instanceof Potion){
+                this.bag.removeArtefact(index);
+                Potion potion = (Potion) artefact;
+                this.hp += potion.getHP();
+                if (this.hp % this.hp_max > 0){
+                    this.hp = this.hp_max;
+                }
+            } else {
+                System.err.println("ERROR: Using artefact from bag");
+            }
+        } else {
+            System.err.println("Error: Getting some artefact from bag.");
+        }
+    }
     public void clearBag(){
         this.bag.clear();
     }
-    public int getHp() {
-        return hp;
-    }
-    public void setHp(int hp) {
-        this.hp = hp;
-    }
+    
     public Armor getArmor() {
         return armor;
     }
     public void setArmor(Armor armor) {
         this.armor = armor;
     }
+    
     public Weapon getWeapon() {
         return weapon;
     }
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
+    
     /*ACTIONS*/
     public void move(Map map,char dir){
         int x_fin = this.x;
@@ -109,6 +131,15 @@ public class Avatar extends Entity{
     
     public boolean attack(){
         return true;
+    }
+    
+    public void attackedBy(int damage){
+        double def = this.armor.getDef();
+        double dmgMultiplier = 1 - 0.06 * def / ( 1 + 0.06 * Math.abs(def) );
+        this.hp -= damage*dmgMultiplier;
+    }
+    public void updateHPMax(){
+        //TODO
     }
     
     public void pickUpArtefact(Map map){

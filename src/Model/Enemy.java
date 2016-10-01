@@ -6,6 +6,7 @@
 package Model;
 
 import View.Painter;
+import java.util.Random;
 
 /**
  *
@@ -13,16 +14,20 @@ import View.Painter;
  */
 public class Enemy extends Entity{
     public static final String COLOR_ENEMY = Painter.ANSI_GREEN;
+    private static final Random rnd = new Random();
     private static final int LEVEL_DEF = 1;
+    private static final int HP_BASE = 20;
     
     private int level;
+    private int attack;
+    private int armor;
     
     public Enemy() {
-        super();
+        super(HP_BASE);
         this.setColor(COLOR_ENEMY);
     }
     public Enemy(int x, int y, int level) {
-        super(x,y);
+        super(x,y, HP_BASE);
         this.setColor(COLOR_ENEMY);
         this.level = level;
     }
@@ -33,4 +38,20 @@ public class Enemy extends Entity{
     public void setLevel(int level){
         this.level = level;
     }
+    public int getAttack(){
+        return this.attack;
+    }
+    public int getArmor(){
+        return this.armor;
+    }
+    
+    public void attackedBy(int points){
+        //TODO
+    }
+    
+    private int generateHPByLvl(int level){
+        return (int)(HP_BASE * ( 1 + rnd.nextDouble()));
+    }
+    
+    
 }
