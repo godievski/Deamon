@@ -16,11 +16,8 @@ import Model.Map;
 import Model.Potion;
 import Model.Weapon;
 import java.awt.Point;
-import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -147,7 +144,7 @@ public class Game {
         for(int i = 0; i < MAX_LEVEL_DEF;i ++){
             Map map = this.mngMap.getMap(i);
             this.generateEnemies(map, i);
-            this.generateArtefact(map);
+            this.generateArtefact(map,i);
         }
     }
     private void initAvatar(){
@@ -180,14 +177,14 @@ public class Game {
     }
     
     //TODO: Same to enemies
-    private void generateArtefact(Map map){
+    private void generateArtefact(Map map, int level){
         int l = map.getLength() - 1;
         int w = map.getWidth() - 1;
         for(int i = 1; i < w; i++){
             for(int j = 1; j < l; j++){
                 Cell cell = map.getCell(i, j);
                 if(cell.getType() == Cell.IN){
-                    Artefact artefact = randomArtefact();
+                    Artefact artefact = randomArtefact(level);
                     double prob = artefact.getProb();
                     double dec = rnd.nextDouble();
                     if (dec <= prob){
@@ -199,15 +196,17 @@ public class Game {
         }
     } 
     
-    private Artefact randomArtefact(){
+    private Artefact randomArtefact(int level){
         int dec = rnd.nextInt(3);
+        level += 1;
+        String level_str = Integer.toString(level);
         switch (dec) {
             case 0:
-                return new Armor("Armor 1");
+                return new Armor("Armor" + level_str, level);
             case 1:
-                return new Weapon("Weapon 1");
+                return new Weapon("Weapon" + level_str, level);
             case 2:
-                return new Potion("Potion 1");
+                return new Potion("Potion" + level_str, level);
             default:
                 break;
         }

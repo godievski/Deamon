@@ -40,7 +40,6 @@ public class Map {
             this.level_enemy[i-1] = level + i;
     }
     
-    
     public double getProbEnemy(){
         return this.prob_enemy;
     }

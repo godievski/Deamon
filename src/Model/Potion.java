@@ -10,17 +10,13 @@ package Model;
  * @author godievski
  */
 public class Potion extends Artefact{
-    private static final int HP_DEF = 1;
+    private static final int HP_BASE = 1;
     
     private int hp;
     
-    public Potion(String name) {
-        super(name);
-        this.hp = HP_DEF;
-    }
-    public Potion(String name, int hp) {
-        super(name);
-        this.hp = hp;
+    public Potion(String name, int level) {
+        super(name, level);
+        this.hp = HP_BASE;
     }
     
     public int getHP(){

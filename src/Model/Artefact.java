@@ -23,12 +23,12 @@ public class Artefact extends Sprite{
     private double prob;
     
     
-    public Artefact(String name){
+    public Artefact(String name, int level){
         super(IMAGE_DEF,COLOR_DEF);
         Random rnd = new Random();
         this.name = name;
         this.prob = rnd.nextDouble() / 10;
-        this.nivel = MIN_LEVEL_DEF;
+        this.nivel = level;
     }
     
     public String getName(){
@@ -39,5 +39,8 @@ public class Artefact extends Sprite{
     }
     public double getProb(){
         return this.prob;
+    }
+    public int getNivel(){
+        return this.nivel;
     }
 }

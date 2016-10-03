@@ -10,17 +10,16 @@ package Model;
  * @author godievski
  */
 public class Armor extends Artefact {
-    private static final int DEF_DEFAULT = 10;
+    private static final int DEF_BASE = 10;
+    private static final int HP_PLUS_BASE = 0;
     
     private int def;
+    private int hp_plus;
     
-    public Armor(String name) {
-        super(name);
-        this.def = DEF_DEFAULT;
-    }
-    public Armor(String name, int def){
-        super(name);
-        this.def = def;
+    public Armor(String name, int level) {
+        super(name, level);
+        this.def = DEF_BASE;
+        this.hp_plus = HP_PLUS_BASE;
     }
 
     public int getDef() {
@@ -29,6 +28,11 @@ public class Armor extends Artefact {
     public void setDef(int def) {
         this.def = def;
     }
-    
-    
+    public int getHpPlus(){
+        return this.hp_plus;
+    }
+    public void setHpPlus(int hp){
+        this.hp_plus = hp;
+    }
+
 }
