@@ -11,7 +11,7 @@ import View.Painter;
  *
  * @author godievski
  */
-public class Entity extends Sprite{
+public abstract class Entity extends Sprite{
     /*constants*/
     private static final int X_DEF = 1;
     private static final int Y_DEF = 1;
@@ -31,6 +31,7 @@ public class Entity extends Sprite{
         super(IMAGE_DEF,COLOR_DEF);
         this.x = X_DEF;
         this.y = Y_DEF;
+        this.hp = hp;
     }
     
     public Entity(int x, int y, int hp){
@@ -64,5 +65,10 @@ public class Entity extends Sprite{
     }
     public void decreaseHp(int points){
         this.hp -= points;
+        if (this.hp < 0)
+            this.hp = 0;
     }
+    /*ABSTRACTS*/
+    public abstract int getAttack();
+    public abstract int getArmor();
 }

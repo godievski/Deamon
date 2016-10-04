@@ -26,11 +26,8 @@ public class Enemy extends Entity{
     private int level;
     private int attack;
     private int armor;
+    private int exp;
     
-    public Enemy() {
-        super(HP_BASE);
-        this.setColor(COLOR_ENEMY);
-    }
     public Enemy(int x, int y, int level) {
         super(x,y, HP_BASE);
         this.setColor(COLOR_ENEMY);
@@ -50,13 +47,8 @@ public class Enemy extends Entity{
         return this.armor;
     }
     
-    public void attackedBy(int points){
-        //TODO
-    }
-    
     private int generateHPByLvl(int level){
         return (int)(HP_BASE * ( 1 + rnd.nextDouble()));
     }
-    
     
 }

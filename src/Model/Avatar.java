@@ -7,26 +7,36 @@ package Model;
 
 import View.Painter;
 import java.awt.Point;
+import java.util.Random;
 
 /**
  *
  * @author godievski
  */
 public class Avatar extends Entity{
+    private static final Random rnd = new Random();
+    
     public static final int INIT_DIR = 0;
     public static final int UP_DIR = 1;
     public static final int DOWN_DIR = 2;
     public static final int LEFT_DIR = 3;
     public static final int RIGHT_DIR = 4;
+    public static final int BASE_EXP = 100;
+    
     
     public static final String COLOR_AVATAR = Painter.ANSI_YELLOW;
     public static final int HPMAX = 100;
+    public static final int POINT_HP = 10;
   
     private Bag bag;
     private Armor armor;
     private Weapon weapon;
     private int hp_max;
     private int direction;
+    
+    private int level;
+    private int exp_nextLevel;
+    private int exp;
     
     public Avatar() {
         super(HPMAX);
@@ -36,14 +46,9 @@ public class Avatar extends Entity{
         this.hp = HPMAX;
         this.armor = new Armor("Armor 1",1);
         this.weapon = new Weapon("Weapon 1",1);
-    }
-    public Avatar(char symbol, int x, int y) {
-        super(x,y,HPMAX);
-        this.direction = INIT_DIR;
-        this.bag = new Bag();
-        this.hp = HPMAX;
-        this.armor = new Armor("Armor 1",1);
-        this.weapon = new Weapon("Weapon 1",1);
+        this.level = 1;
+        this.exp = 0;
+        this.exp_nextLevel = BASE_EXP * (2); 
     }
     
     public Artefact getArtefact(int index) {
@@ -84,13 +89,23 @@ public class Avatar extends Entity{
         this.bag.clear();
     }
     
-    public Armor getArmor() {
-        return armor;
+    @Override
+    public int getArmor() {
+        return this.armor.getDef();
     }
-    public void setArmor(Armor armor) {
-        this.armor = armor;
+    @Override
+    public int getAttack(){
+        int dmgRnd = 0;
+        dmgRnd = rnd.nextInt(this.weapon.getDamage_max() - this.weapon.getDamage_min()) + this.weapon.getDamage_min();
+        return dmgRnd;
     }
     
+    public Armor getArmorArt(){
+        return this.armor;
+    }
+    public void setArmorArt(Armor armor){
+        this.armor = armor;
+    }
     public Weapon getWeapon() {
         return weapon;
     }
@@ -133,13 +148,18 @@ public class Avatar extends Entity{
         return true;
     }
     
-    public void attackedBy(int damage){
-        double def = this.armor.getDef();
-        double dmgMultiplier = 1 - 0.06 * def / ( 1 + 0.06 * Math.abs(def) );
-        this.hp -= damage*dmgMultiplier;
-    }
     public void updateHPMax(){
         //TODO
+    }
+    
+    public void gainExp(int exp){
+        this.exp += exp;
+        if (this.exp > this.exp_nextLevel){
+            this.exp -= this.exp_nextLevel;
+            this.level += 1;
+            this.exp_nextLevel = (this.level + 1) * BASE_EXP;
+            this.hp_max += this.hp_max;
+        }
     }
     
     public void pickUpArtefact(Map map){
@@ -163,6 +183,7 @@ public class Avatar extends Entity{
             }
         }
     }
+    
     public int getDirection(){
         return this.direction;
     }
